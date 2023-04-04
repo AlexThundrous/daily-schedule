@@ -21,6 +21,9 @@ function App() {
             onChange={() => toggleTheme(theme, setTheme)} isDarkMode={theme === "dark"}
           />
         </div>
+        <a href="https://github.com/AlexThundrous/daily-schedule" target="_blank" rel="noopener noreferrer" className="source-link">
+          Source
+        </a>
       </div>
     </ThemeContext.Provider>
   );
