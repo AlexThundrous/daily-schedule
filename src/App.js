@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import Schedule from "./components/schedule.js";
+import { DarkModeToggle } from "react-dark-mode-toggle-2";
+import "./App.css";
+
+export const ThemeContext = createContext(null);
 
 function App() {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={theme}>
+        <Schedule />
+        <div className="toggle">
+          <DarkModeToggle
+            onChange={() => toggleTheme(theme, setTheme)} isDarkMode={theme === "dark"}
+          />
+        </div>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
 export default App;
+
+
